@@ -1,0 +1,64 @@
+﻿@using VerticalSliceExampel.ReportModule.Models.ViewModels;
+@model ReportViewModel
+@{
+    Layout = "_Layout";
+}
+<link href="/css/site.css" rel="stylesheet" />
+<script src="/js/site.js"></script>
+<div class="container mt-4">
+    <h2>Reports</h2>
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    <form asp-action="CreateReport" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="Name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="Description">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Report</button>
+    </form>
+
+    <h3 class="mt-5">Existing Reports</h3>
+    <form asp-action="UpdateReport" method="post">
+        <div class="mb-3">
+            <label for="reportSelect" class="form-label">Select Report</label>
+            <select class="form-select" id="reportSelect" name="Id" asp-items="@(new SelectList(Model.Reports, "Id", "Name"))">
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="newName" class="form-label">New Name</label>
+            <input type="text" class="form-control" id="newName" name="NewName">
+        </div>
+
+        <div class="mb-3">
+            <label for="newDescription" class="form-label">New Description</label>
+            <input type="text" class="form-control" id="newDescription" name="NewDescription">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Report</button>
+    </form>
+
+    <form asp-action="DeleteReport" method="post" class="mt-4">
+        <input type="hidden" id="deleteId" name="Id" asp-for="Reports.First().Id" />
+        <button type="submit" class="btn btn-danger">Delete Selected Report</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    <script>
+        document.getElementById("reportSelect").addEventListener("change", function() {
+            document.getElementById("deleteId").value = this.value;
+        });
+    </script>
+}
+

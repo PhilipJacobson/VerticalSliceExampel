@@ -1,0 +1,38 @@
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
+using VerticalSliceExampel.CommonModule.Validation;
+
+namespace VerticalSliceExampel.CommonModule;
+
+public class Response<TValue> : IResponse
+{
+    public bool IsError { get; }
+    public bool IsSuccess => !IsError;
+
+    private readonly TValue? Value;
+    public IActionResult ActionResult { get; }
+
+    private Response(TValue value, bool isError, IActionResult actionResult)
+    {
+        Value = value;
+        IsError = isError;
+        ActionResult = actionResult;
+    }
+
+    object IResponse.Value => Value;
+    public static Response<TValue> Ok(TValue value)
+    {
+        var actionResult = new OkObjectResult(value);
+        return new Response<TValue>(value, false, actionResult);
+    }
+
+    public static Response<TValue> BadRequest<TError>(TError error)
+    {
+        return new Response<TValue>(default, true, new BadRequestObjectResult(error));
+    }
+
+    public static Response<TValue> NotFound()
+    {
+        return new Response<TValue>(default, true, new NotFoundResult());
+    }
+}
