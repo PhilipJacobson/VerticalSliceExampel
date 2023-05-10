@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerticalSliceExample", "VerticalSliceExampel\VerticalSliceExample.csproj", "{C8DC615E-677C-46E2-A8FC-795E6AA03E3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerticalSliceExample.Tests", "VerticalSliceExample.Tests\VerticalSliceExample.Tests.csproj", "{73628891-8C93-4626-B6F1-C5450A55F552}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C8DC615E-677C-46E2-A8FC-795E6AA03E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8DC615E-677C-46E2-A8FC-795E6AA03E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8DC615E-677C-46E2-A8FC-795E6AA03E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73628891-8C93-4626-B6F1-C5450A55F552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73628891-8C93-4626-B6F1-C5450A55F552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73628891-8C93-4626-B6F1-C5450A55F552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73628891-8C93-4626-B6F1-C5450A55F552}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
