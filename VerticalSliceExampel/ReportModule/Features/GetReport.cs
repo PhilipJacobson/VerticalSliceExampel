@@ -3,12 +3,12 @@ using AutoMapper;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
-using VerticalSliceExampel.CommonModule;
-using VerticalSliceExampel.CommonModule.Validation;
-using VerticalSliceExampel.ReportModule.Models.ViewModels;
-using VerticalSliceExampel.ReportModule.Repositories.Interface;
+using VerticalSliceExample.CommonModule;
+using VerticalSliceExample.CommonModule.Validation;
+using VerticalSliceExample.ReportModule.Models.ViewModels;
+using VerticalSliceExample.ReportModule.Repositories.Interface;
 
-namespace VerticalSliceExampel.ReportModule.Features;
+namespace VerticalSliceExample.ReportModule.Features;
 
 public class GetReport : IRequest<IResponse>
 {

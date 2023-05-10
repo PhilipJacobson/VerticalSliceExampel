@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
-using FluentValidation.Results;
 using MediatR;
-using VerticalSliceExampel.CommonModule;
-using Db = VerticalSliceExampel.ReportModule.Models.Models;
-using VerticalSliceExampel.ReportModule.Models.ViewModels;
-using VerticalSliceExampel.ReportModule.Repositories.Interface;
-using VerticalSliceExampel.CommonModule.Validation;
+using VerticalSliceExample.CommonModule;
+using Db = VerticalSliceExample.ReportModule.Models.Models;
+using VerticalSliceExample.ReportModule.Models.ViewModels;
+using VerticalSliceExample.ReportModule.Repositories.Interface;
 using FluentValidation;
-using System.ComponentModel.DataAnnotations;
-using VerticalSliceExampel.ReportModule.Repositories;
 
-namespace VerticalSliceExampel.ReportModule.Features;
+namespace VerticalSliceExample.ReportModule.Features;
 
 public class CreateReport : IRequest<IResponse>
 {

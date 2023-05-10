@@ -1,4 +1,4 @@
-﻿namespace VerticalSliceExampel.CommonModule.PipelineBehaviors;
+﻿namespace VerticalSliceExample.CommonModule.PipelineBehaviors;
 
 using MediatR;
 using Microsoft.Extensions.Logging;

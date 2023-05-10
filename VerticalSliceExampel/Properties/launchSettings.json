@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "VerticalSliceExampel": {
+    "VerticalSliceExample": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

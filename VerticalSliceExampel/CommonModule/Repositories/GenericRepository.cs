@@ -1,9 +1,9 @@
 ﻿using System.Linq.Expressions;
-using VerticalSliceExampel.CommonModule.Data;
-using VerticalSliceExampel.CommonModule.Repository.Interface;
+using VerticalSliceExample.CommonModule.Data;
+using VerticalSliceExample.CommonModule.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace VerticalSliceExampel.CommonModule.Repository;
+namespace VerticalSliceExample.CommonModule.Repository;
 
 public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
 {

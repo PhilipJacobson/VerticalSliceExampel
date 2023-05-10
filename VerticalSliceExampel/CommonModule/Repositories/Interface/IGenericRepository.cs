@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace VerticalSliceExampel.CommonModule.Repository.Interface
+namespace VerticalSliceExample.CommonModule.Repository.Interface
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

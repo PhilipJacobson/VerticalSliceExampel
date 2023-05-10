@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using VerticalSliceExampel.CommonModule;
-using VerticalSliceExampel.ReportModule.Models.ViewModels;
-using VerticalSliceExampel.ReportModule.Repositories;
-using VerticalSliceExampel.ReportModule.Repositories.Interface;
+using VerticalSliceExample.CommonModule;
+using VerticalSliceExample.ReportModule.Models.ViewModels;
+using VerticalSliceExample.ReportModule.Repositories;
+using VerticalSliceExample.ReportModule.Repositories.Interface;
 
-namespace VerticalSliceExampel.ReportModule.Features
+namespace VerticalSliceExample.ReportModule.Features
 {
     public class UpdateReport : IRequest<IResponse>
     {

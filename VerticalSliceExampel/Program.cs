@@ -3,14 +3,14 @@ using System.Reflection;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using VerticalSliceExampel.CommonModule;
-using VerticalSliceExampel.CommonModule.Data;
-using VerticalSliceExampel.CommonModule.PipelineBehaviors;
-using VerticalSliceExampel.CommonModule.Repository;
-using VerticalSliceExampel.CommonModule.Repository.Interface;
-using VerticalSliceExampel.ReportModule.Features;
-using VerticalSliceExampel.ReportModule.Repositories;
-using VerticalSliceExampel.ReportModule.Repositories.Interface;
+using VerticalSliceExample.CommonModule;
+using VerticalSliceExample.CommonModule.Data;
+using VerticalSliceExample.CommonModule.PipelineBehaviors;
+using VerticalSliceExample.CommonModule.Repository;
+using VerticalSliceExample.CommonModule.Repository.Interface;
+using VerticalSliceExample.ReportModule.Features;
+using VerticalSliceExample.ReportModule.Repositories;
+using VerticalSliceExample.ReportModule.Repositories.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 

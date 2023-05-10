@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using FluentValidation;
 using FluentValidation.Results;
-using VerticalSliceExampel.CommonModule.Validation;
+using VerticalSliceExample.CommonModule.Validation;
 using Azure;
 
-namespace VerticalSliceExampel.CommonModule.PipelineBehaviors;
+namespace VerticalSliceExample.CommonModule.PipelineBehaviors;
 
 public class ValidationBehavior<TRequest, TResult> : IPipelineBehavior<TRequest, IResponse>
     where TRequest : notnull

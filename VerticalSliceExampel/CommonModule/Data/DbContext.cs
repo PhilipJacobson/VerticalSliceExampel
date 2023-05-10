@@ -1,7 +1,7 @@
-﻿using VerticalSliceExampel.ReportModule.Models.Models;
+﻿using VerticalSliceExample.ReportModule.Models.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace VerticalSliceExampel.CommonModule.Data;
+namespace VerticalSliceExample.CommonModule.Data;
 
 public class AppDbContext : DbContext
 {

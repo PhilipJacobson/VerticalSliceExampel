@@ -1,4 +1,4 @@
-﻿namespace VerticalSliceExampel.ReportModule.Models.ViewModels;
+﻿namespace VerticalSliceExample.ReportModule.Models.ViewModels;
 public class Report
 {
     public Guid Id { get; set; }

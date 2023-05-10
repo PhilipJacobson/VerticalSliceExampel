@@ -1,8 +1,8 @@
 ﻿using Azure;
 using Microsoft.AspNetCore.Mvc;
-using VerticalSliceExampel.CommonModule.Validation;
+using VerticalSliceExample.CommonModule.Validation;
 
-namespace VerticalSliceExampel.CommonModule;
+namespace VerticalSliceExample.CommonModule;
 
 public class Response<TValue> : IResponse
 {

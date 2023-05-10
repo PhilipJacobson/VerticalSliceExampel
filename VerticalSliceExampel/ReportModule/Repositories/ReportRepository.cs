@@ -1,10 +1,10 @@
-﻿using VerticalSliceExampel.CommonModule.Data;
-using VerticalSliceExampel.CommonModule.Repository;
-using VerticalSliceExampel.ReportModule.Models.Models;
-using VerticalSliceExampel.ReportModule.Repositories.Interface;
+﻿using VerticalSliceExample.CommonModule.Data;
+using VerticalSliceExample.CommonModule.Repository;
+using VerticalSliceExample.ReportModule.Models.Models;
+using VerticalSliceExample.ReportModule.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
-namespace VerticalSliceExampel.ReportModule.Repositories;
+namespace VerticalSliceExample.ReportModule.Repositories;
 
 public class ReportRepository : GenericRepository<Report>, IReportRepository
 {

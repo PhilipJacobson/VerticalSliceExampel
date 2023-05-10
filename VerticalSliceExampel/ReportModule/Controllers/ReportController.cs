@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using VerticalSliceExampel.ReportModule.Features;
+using VerticalSliceExample.ReportModule.Features;
 using Microsoft.AspNetCore.Mvc;
 
-namespace VerticalSliceExampel.ReportModule.Controllers;
+namespace VerticalSliceExample.ReportModule.Controllers;
 
 [Route("reports")]
 public class ReportController : Controller

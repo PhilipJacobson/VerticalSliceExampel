@@ -1,9 +1,9 @@
-﻿namespace VerticalSliceExampel.ReportModule.MappingProfile;
+﻿namespace VerticalSliceExample.ReportModule.MappingProfile;
 
 using AutoMapper;
-using Db = VerticalSliceExampel.ReportModule.Models.Models;
-using VerticalSliceExampel.ReportModule.Models.ViewModels;
-using VerticalSliceExampel.ReportModule.Features;
+using Db = VerticalSliceExample.ReportModule.Models.Models;
+using VerticalSliceExample.ReportModule.Models.ViewModels;
+using VerticalSliceExample.ReportModule.Features;
 
 public class ReportProfile : Profile
 {

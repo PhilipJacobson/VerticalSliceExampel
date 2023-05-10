@@ -1,4 +1,4 @@
-﻿namespace VerticalSliceExampel.ReportModule.Models.Models
+﻿namespace VerticalSliceExample.ReportModule.Models.Models
 {
     public class Report
     {

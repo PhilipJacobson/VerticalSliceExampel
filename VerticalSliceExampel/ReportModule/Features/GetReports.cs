@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
 using MediatR;
-using VerticalSliceExampel.CommonModule;
-using VerticalSliceExampel.CommonModule.Validation;
-using VerticalSliceExampel.ReportModule.Models.ViewModels;
-using Db = VerticalSliceExampel.ReportModule.Models.Models;
+using VerticalSliceExample.CommonModule;
+using VerticalSliceExample.CommonModule.Validation;
+using VerticalSliceExample.ReportModule.Models.ViewModels;
+using Db = VerticalSliceExample.ReportModule.Models.Models;
 
-using VerticalSliceExampel.ReportModule.Repositories.Interface;
+using VerticalSliceExample.ReportModule.Repositories.Interface;
 using System.Linq.Expressions;
 
-namespace VerticalSliceExampel.ReportModule.Features;
+namespace VerticalSliceExample.ReportModule.Features;
 
 public class GetReports : IRequest<IResponse>
 {

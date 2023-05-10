@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
-using VerticalSliceExampel.CommonModule;
-using VerticalSliceExampel.ReportModule.Repositories.Interface;
+using VerticalSliceExample.CommonModule;
+using VerticalSliceExample.ReportModule.Repositories.Interface;
 
-namespace VerticalSliceExampel.ReportModule.Features
+namespace VerticalSliceExample.ReportModule.Features
 {
     public class DeleteReport : IRequest<IResponse>
     {

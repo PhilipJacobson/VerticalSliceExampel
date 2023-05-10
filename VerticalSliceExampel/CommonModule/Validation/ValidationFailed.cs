@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace VerticalSliceExampel.CommonModule.Validation;
+namespace VerticalSliceExample.CommonModule.Validation;
 
 public class ValidationFailed
 {

@@ -1,7 +1,7 @@
-﻿using VerticalSliceExampel.CommonModule.Repository.Interface;
-using VerticalSliceExampel.ReportModule.Models.Models;
+﻿using VerticalSliceExample.CommonModule.Repository.Interface;
+using VerticalSliceExample.ReportModule.Models.Models;
 
-namespace VerticalSliceExampel.ReportModule.Repositories.Interface;
+namespace VerticalSliceExample.ReportModule.Repositories.Interface;
 
 public interface IReportRepository : IGenericRepository<Report>
 {

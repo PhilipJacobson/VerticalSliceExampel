@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace VerticalSliceExampel.CommonModule;
+namespace VerticalSliceExample.CommonModule;
 
 public interface IResponse
 {

@@ -1,4 +1,4 @@
-﻿namespace VerticalSliceExampel.CommonModule.RedisCache;
+﻿namespace VerticalSliceExample.CommonModule.RedisCache;
 
 public interface IRedisCache
 {

@@ -3,7 +3,7 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace VerticalSliceExampel.CommonModule.RedisCache;
+namespace VerticalSliceExample.CommonModule.RedisCache;
 
 public class RedisCache : IRedisCache
 {
