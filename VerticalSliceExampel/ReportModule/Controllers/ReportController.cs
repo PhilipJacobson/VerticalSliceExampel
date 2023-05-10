@@ -18,13 +18,13 @@ public class ReportController : Controller
     {
         var query = new GetReports { Ids = new List<Guid>(), Descriptions = new List<string>() };
         var result = await _mediator.Send(query);
-        return View("~/ReportModule/View/Report.cshtml", result.Value);
+        return View("~/ReportModule/Views/Report.cshtml", result.Value);
     }
 
     [HttpPost]
     public async Task<IActionResult> GetReports(GetReports query)
     {
         var result = await _mediator.Send(query);
-        return View("~/ReportModule/View/Report.cshtml", result.Value);
+        return View("~/ReportModule/Views/Report.cshtml", result.Value);
     }
 }

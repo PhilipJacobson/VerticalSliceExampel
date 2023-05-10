@@ -1,7 +1,8 @@
 ﻿@using VerticalSliceExampel.ReportModule.Models.ViewModels;
 @model ReportViewModel
 @{
-    Layout = "_Layout";
+    ViewData["Title"] = "Page Title";
+    Layout = "~/CommonModule/Pages/Shared/_Layout.cshtml";
 }
 <link href="/css/site.css" rel="stylesheet" />
 <script src="/js/site.js"></script>
@@ -30,8 +31,15 @@
     <form asp-action="UpdateReport" method="post">
         <div class="mb-3">
             <label for="reportSelect" class="form-label">Select Report</label>
-            <select class="form-select" id="reportSelect" name="Id" asp-items="@(new SelectList(Model.Reports, "Id", "Name"))">
-            </select>
+            @if (Model.Reports != null && Model.Reports.Any())
+            {
+                <label for="reportSelect" class="form-label">Select Report</label>
+                @Html.DropDownListFor(m => m.Reports, new SelectList(Model.Reports, "Id", "Name"), new { @class = "form-select", id = "reportSelect" })
+            }
+            else
+            {
+                <p>No reports available.</p>
+            }
         </div>
 
         <div class="mb-3">

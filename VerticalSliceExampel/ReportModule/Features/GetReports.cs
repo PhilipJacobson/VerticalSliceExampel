@@ -27,15 +27,15 @@ public class GetReports : IRequest<IResponse>
         public async Task<IResponse> Handle(GetReports query, CancellationToken cancellationToken)
         {
             Expression<Func<Db.Report, bool>> filter = null;
-            if (query?.Ids.Count > 0 && query?.Descriptions.Count > 0)
+            if (query?.Ids?.Count > 0 && query?.Descriptions?.Count > 0)
             {
                 filter = x => query.Descriptions.Contains(x.Description) && query.Ids.Contains(x.Id);
             }
-            else if (query?.Ids.Count > 0)
+            else if (query?.Ids?.Count > 0)
             {
                 filter = x => query.Ids.Contains(x.Id);
             }
-            else if (query?.Descriptions.Count > 0)
+            else if (query?.Descriptions?.Count > 0)
             {
                 filter = x => query.Descriptions.Contains(x.Description);
             }

@@ -14,6 +14,13 @@ using VerticalSliceExampel.ReportModule.Repositories.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions>(options =>
+{
+    options.AreaViewLocationFormats.Clear();
+    options.AreaViewLocationFormats.Add("/CommonModule/Pages/{2}/{1}/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("/CommonModule/Pages/Shared/{0}.cshtml");
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
