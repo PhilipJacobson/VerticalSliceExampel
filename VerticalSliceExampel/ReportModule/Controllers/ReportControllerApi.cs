@@ -15,16 +15,39 @@ public class ReportControllerAPI : Controller
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(Guid id)
     {
-        var result = await _mediator.Send(new GetReport { Id = id });
-        return result.ActionResult;
+        var response = await _mediator.Send(new GetReport { Id = id });
+        return response.ActionResult;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateReport(CreateReport command)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> Create(CreateReport command)
     {
-        var result = await _mediator.Send(command);
-        return result.ActionResult;
+        var response = await _mediator.Send(command);
+        return response.ActionResult;
+    }
+
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete([FromBody] DeleteReport command)
+    {
+        var response = await _mediator.Send(command);
+
+        return response.ActionResult;
+    }
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateReport command)
+    {
+        command.Id = id;       
+        var response = await _mediator.Send(command);
+        return response.ActionResult;
     }
 }
