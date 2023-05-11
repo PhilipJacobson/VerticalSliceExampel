@@ -7,8 +7,6 @@ namespace VerticalSliceExample.PhoneModule.Features;
 
 public class GetPhone : IRequest<IResponse<Phone>>
 {
-    public Guid Id { get; set; }
-
     public class Handler : IRequestHandler<GetPhone, IResponse<Phone>>
     {
         public Handler()

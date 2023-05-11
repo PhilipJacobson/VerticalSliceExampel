@@ -18,7 +18,6 @@ namespace VerticalSliceExample.Tests.ReportModuleTests;
 
 public class TrationalReportTest
 {
-
     [Fact]
     public async Task GetByIdAsync_ShouldReturnReport_WhenReportExists()
     {

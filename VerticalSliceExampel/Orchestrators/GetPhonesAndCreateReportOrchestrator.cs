@@ -9,8 +9,6 @@ namespace VerticalSliceExample.Orchestrators;
 
 public class GetPhonesAndCreateReportOrchestrator : IRequest<IResponse<Report>>
 {
-    public Guid PhoneId { get; set; }
-
     public class Handler : IRequestHandler<GetPhonesAndCreateReportOrchestrator, IResponse<Report>>
     {
         private readonly IMediator _mediator;
@@ -20,7 +18,7 @@ public class GetPhonesAndCreateReportOrchestrator : IRequest<IResponse<Report>>
         }
         public async Task<IResponse<Report>> Handle(GetPhonesAndCreateReportOrchestrator request, CancellationToken cancellationToken)
         {
-            var phone = await _mediator.Send(new GetPhone { Id = request.PhoneId }, cancellationToken);
+            var phone = await _mediator.Send(new GetPhone(), cancellationToken);
             if (phone.IsError)
             {
                 return Response<Report>.NotFound();

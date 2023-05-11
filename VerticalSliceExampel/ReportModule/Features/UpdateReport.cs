@@ -5,6 +5,7 @@ using VerticalSliceExample.ReportModule.Models.ViewModels;
 using Db = VerticalSliceExample.ReportModule.Models.Models;
 
 using VerticalSliceExample.ReportModule.Repositories.Interface;
+using FluentValidation;
 
 namespace VerticalSliceExample.ReportModule.Features
 {
@@ -55,6 +56,15 @@ namespace VerticalSliceExample.ReportModule.Features
                 if (!string.IsNullOrEmpty(command.Description))
                 {
                     report.Description = command.Description;
+                }
+            }
+            public class UpdateReportValidation : AbstractValidator<UpdateReport>
+            {
+                public UpdateReportValidation()
+                {
+                    RuleFor(x => x.Id)
+                    .NotEmpty().WithMessage("ReportId is required.")
+                    .Must(id => Guid.TryParse(id.ToString(), out _)).WithMessage("Invalid ReportId.");
                 }
             }
         }

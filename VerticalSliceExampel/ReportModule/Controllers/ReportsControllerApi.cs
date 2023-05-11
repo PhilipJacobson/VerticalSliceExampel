@@ -51,12 +51,12 @@ public class ReportsControllerApi : Controller
         return response.ActionResult;
     }
 
-    [HttpPost("phone/{phoneId}")]
+    [HttpPost("phone")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> CreateReportFromPhone(Guid phoneId)
+    public async Task<IActionResult> CreateReportFromPhone()
     {
-        var response = await _mediator.Send(new GetPhonesAndCreateReportOrchestrator { PhoneId = phoneId });
+        var response = await _mediator.Send(new GetPhonesAndCreateReportOrchestrator());
         return response.ActionResult;
     }
 }
