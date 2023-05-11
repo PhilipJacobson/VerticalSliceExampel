@@ -8,12 +8,12 @@ using FluentValidation;
 
 namespace VerticalSliceExample.ReportModule.Features;
 
-public class CreateReport : IRequest<IResponse>
+public class CreateReport : IRequest<IResponse<Report>>
 {
         public string Name { get; set; }
         public string Description { get; set; }
 
-    public class Handler : IRequestHandler<CreateReport, IResponse>
+    public class Handler : IRequestHandler<CreateReport, IResponse<Report>>
     {
         private readonly IReportRepository _reportRepository;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ public class CreateReport : IRequest<IResponse>
             _reportRepository = reportRepository;
             _mapper = mapper;
         }
-        public async Task<IResponse> Handle(CreateReport command, CancellationToken cancellationToken)
+        public async Task<IResponse<Report>> Handle(CreateReport command, CancellationToken cancellationToken)
         {
             var report = _mapper.Map<Db.Report>(command);
             report = await _reportRepository.AddAsync(report);

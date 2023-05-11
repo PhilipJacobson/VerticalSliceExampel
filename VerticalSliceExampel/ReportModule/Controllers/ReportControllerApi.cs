@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using VerticalSliceExample.ReportModule.Features;
 using Microsoft.AspNetCore.Mvc;
+using VerticalSliceExample.Orchestrators;
 
 namespace VerticalSliceExample.ReportModule.Controllers;
 
@@ -37,7 +38,6 @@ public class ReportControllerAPI : Controller
     public async Task<IActionResult> Delete([FromBody] DeleteReport command)
     {
         var response = await _mediator.Send(command);
-
         return response.ActionResult;
     }
 
@@ -46,8 +46,17 @@ public class ReportControllerAPI : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(Guid id, [FromBody] UpdateReport command)
     {
-        command.Id = id;       
+        command.Id = id;
         var response = await _mediator.Send(command);
+        return response.ActionResult;
+    }
+
+    [HttpPost("phone/{phoneId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> CreateReportFromPhone(Guid phoneId)
+    {
+        var response = await _mediator.Send(new GetPhonesAndCreateReportOrchestrator { PhoneId = phoneId });
         return response.ActionResult;
     }
 }

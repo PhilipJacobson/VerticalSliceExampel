@@ -4,7 +4,6 @@ using VerticalSliceExample.ReportModule.Features;
 using VerticalSliceExample.ReportModule.Repositories.Interface;
 using Db = VerticalSliceExample.ReportModule.Models.Models;
 using VerticalSliceExample.ReportModule.Models.ViewModels;
-
 using Microsoft.AspNetCore.Mvc;
 
 public class GetReportTests

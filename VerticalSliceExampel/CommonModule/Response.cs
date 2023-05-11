@@ -4,7 +4,7 @@ using VerticalSliceExample.CommonModule.Validation;
 
 namespace VerticalSliceExample.CommonModule;
 
-public class Response<TValue> : IResponse
+public class Response<TValue> : IResponse<TValue>
 {
     public bool IsError { get; }
     public bool IsSuccess => !IsError;
@@ -19,7 +19,8 @@ public class Response<TValue> : IResponse
         ActionResult = actionResult;
     }
 
-    object IResponse.Value => Value;
+    TValue IResponse<TValue>.Value => Value;
+
     public static Response<TValue> Ok(TValue value)
     {
         var actionResult = new OkObjectResult(value);
@@ -28,11 +29,11 @@ public class Response<TValue> : IResponse
 
     public static Response<TValue> BadRequest<TError>(TError error)
     {
-        return new Response<TValue>(default, true, new BadRequestObjectResult(error));
+        return new Response<TValue>(default(TValue), true, new BadRequestObjectResult(error));
     }
 
     public static Response<TValue> NotFound()
     {
-        return new Response<TValue>(default, true, new NotFoundResult());
+        return new Response<TValue>(default(TValue), true, new NotFoundResult());
     }
 }

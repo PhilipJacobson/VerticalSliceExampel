@@ -26,10 +26,8 @@
 
   <ItemGroup>
     <Folder Include="PhoneModule\Controllers\" />
-    <Folder Include="PhoneModule\Features\" />
     <Folder Include="PhoneModule\MappingProfile\" />
     <Folder Include="PhoneModule\Models\Models\" />
-    <Folder Include="PhoneModule\Models\ViewModels\" />
     <Folder Include="PhoneModule\Repositories\" />
     <Folder Include="ReportModule\PipelineBehaviors\" />
   </ItemGroup>

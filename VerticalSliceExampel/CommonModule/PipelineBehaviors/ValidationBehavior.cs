@@ -6,7 +6,7 @@ using Azure;
 
 namespace VerticalSliceExample.CommonModule.PipelineBehaviors;
 
-public class ValidationBehavior<TRequest, TResult> : IPipelineBehavior<TRequest, IResponse>
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, IResponse<TResponse>>
     where TRequest : notnull
 {
     private readonly IValidator<TRequest> _validator;
@@ -15,16 +15,16 @@ public class ValidationBehavior<TRequest, TResult> : IPipelineBehavior<TRequest,
         _validator = validator;
     }
 
-    public async Task<IResponse> Handle(
+    public async Task<IResponse<TResponse>> Handle(
         TRequest request,
-        RequestHandlerDelegate<IResponse> next,
+        RequestHandlerDelegate<IResponse<TResponse>> next,
         CancellationToken cancellationToken
         )
     {
         var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
         {
-            return Response<ValidationFailed>.BadRequest(validationResult.Errors);
+            return Response<TResponse>.BadRequest(validationResult.Errors);
         }
         return await next();
     }

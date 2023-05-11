@@ -3,6 +3,7 @@ using AutoMapper;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
+using StackExchange.Redis;
 using VerticalSliceExample.CommonModule;
 using VerticalSliceExample.CommonModule.Validation;
 using VerticalSliceExample.ReportModule.Models.ViewModels;
@@ -10,11 +11,11 @@ using VerticalSliceExample.ReportModule.Repositories.Interface;
 
 namespace VerticalSliceExample.ReportModule.Features;
 
-public class GetReport : IRequest<IResponse>
+public class GetReport : IRequest<IResponse<Report>>
 {
     public Guid Id { get; set; }
 
-    public class Handler : IRequestHandler<GetReport, IResponse>
+    public class Handler : IRequestHandler<GetReport, IResponse<Report>>
     {
         private readonly IMapper _mapper;
         private readonly IReportRepository _reportRepository;
@@ -24,11 +25,12 @@ public class GetReport : IRequest<IResponse>
             _mapper = mapper;
         }
 
-        public async Task<IResponse> Handle(
+        public async Task<IResponse<Report>> Handle(
             GetReport query,
             CancellationToken cancellationToken
             )
         {
+
             var report = await _reportRepository.GetByIdAsync(query.Id);
             if (report == null)
             {

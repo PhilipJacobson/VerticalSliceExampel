@@ -5,18 +5,18 @@ using VerticalSliceExample.ReportModule.Repositories.Interface;
 
 namespace VerticalSliceExample.ReportModule.Features
 {
-    public class DeleteReport : IRequest<IResponse>
+    public class DeleteReport : IRequest<IResponse<Guid>>
     {
         public Guid Id { get; set; }
 
-        public class Handler : IRequestHandler<DeleteReport, IResponse>
+        public class Handler : IRequestHandler<DeleteReport, IResponse<Guid>>
         {
             private readonly IReportRepository _reportRepository;
             public Handler(IReportRepository reportRepository)
             {
                 _reportRepository = reportRepository;
             }
-            public async Task<IResponse> Handle(DeleteReport command, CancellationToken cancellationToken)
+            public async Task<IResponse<Guid>> Handle(DeleteReport command, CancellationToken cancellationToken)
             {
                 var report = await _reportRepository.GetByIdAsync(command.Id);
                 if (report == null)

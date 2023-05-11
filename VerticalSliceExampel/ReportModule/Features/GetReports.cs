@@ -11,11 +11,11 @@ using System.Linq.Expressions;
 
 namespace VerticalSliceExample.ReportModule.Features;
 
-public class GetReports : IRequest<IResponse>
+public class GetReports : IRequest<IResponse<ReportViewModel>>
 {
     public List<string> Descriptions { get; set; }
     public List<Guid> Ids { get; set; }
-    public class Handler : IRequestHandler<GetReports, IResponse>
+    public class Handler : IRequestHandler<GetReports, IResponse<ReportViewModel>>
     {
         private readonly IMapper _mapper;
         private readonly IReportRepository _reportRepository;
@@ -24,7 +24,7 @@ public class GetReports : IRequest<IResponse>
             _reportRepository = reportRepository;
             _mapper = mapper;
         }
-        public async Task<IResponse> Handle(GetReports query, CancellationToken cancellationToken)
+        public async Task<IResponse<ReportViewModel>> Handle(GetReports query, CancellationToken cancellationToken)
         {
             Expression<Func<Db.Report, bool>> filter = null;
             if (query?.Ids?.Count > 0 && query?.Descriptions?.Count > 0)

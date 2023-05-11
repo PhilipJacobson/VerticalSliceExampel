@@ -2,39 +2,60 @@
 using MediatR;
 using VerticalSliceExample.CommonModule;
 using VerticalSliceExample.ReportModule.Models.ViewModels;
-using VerticalSliceExample.ReportModule.Repositories;
+using Db = VerticalSliceExample.ReportModule.Models.Models;
+
 using VerticalSliceExample.ReportModule.Repositories.Interface;
 
 namespace VerticalSliceExample.ReportModule.Features
 {
-    public class UpdateReport : IRequest<IResponse>
+    public class UpdateReport : IRequest<IResponse<Report>>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public class Handler : IRequestHandler<UpdateReport, IResponse>
+        public class Handler : IRequestHandler<UpdateReport, IResponse<Report>>
         {
             private readonly IReportRepository _reportRepository;
             private readonly IMapper _mapper;
+            private readonly IMediator _mediator;
 
-            public Handler(IReportRepository reportRepository, IMapper mapper)
+            public Handler(IReportRepository reportRepository, IMapper mapper, IMediator mediator)
             {
                 _reportRepository = reportRepository;
                 _mapper = mapper;
+                _mediator = mediator;
             }
-            public async Task<IResponse> Handle(UpdateReport command, CancellationToken cancellationToken)
+            public async Task<IResponse<Report>> Handle(UpdateReport command, CancellationToken cancellationToken)
             {
                 var report = await _reportRepository.GetByIdAsync(command.Id);
                 if (report == null)
                 {
-                    return Response<Guid>.NotFound();
+                    return Response<Report>.NotFound();
                 }
-                report.Name = command.Name;
-                report.Description = command.Description;
+
+                UpdateReportFields(command, report);
                 await _reportRepository.UpdateAsync(report);
+
+                await _mediator.Publish(
+                    new PhoneModule.Features.TextMessageSent() { ReportId = report.Id },
+                    cancellationToken
+                    ).ConfigureAwait(false);
+
                 var viewReport = _mapper.Map<Report>(report);
                 return Response<Report>.Ok(viewReport);
+            }
+
+            private void UpdateReportFields(UpdateReport command, Db.Report report)
+            {
+                if (!string.IsNullOrEmpty(command.Name))
+                {
+                    report.Name = command.Name;
+                }
+                if (!string.IsNullOrEmpty(command.Description))
+                {
+                    report.Description = command.Description;
+                }
             }
         }
     }
