@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace VerticalSliceExample.ReportModule.Controllers;
 
 [Route("reports")]
-public class ReportController : Controller
+public class ReportsController : Controller
 {
     private readonly IMediator _mediator;
-    public ReportController(IMediator mediator)
+    public ReportsController(IMediator mediator)
     {
         _mediator = mediator;
     }

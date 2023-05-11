@@ -7,10 +7,10 @@ namespace VerticalSliceExample.ReportModule.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ReportControllerAPI : Controller
+public class ReportsControllerApi : Controller
 {
     private readonly IMediator _mediator;
-    public ReportControllerAPI(IMediator mediator)
+    public ReportsControllerApi(IMediator mediator)
     {
         _mediator = mediator;
     }
