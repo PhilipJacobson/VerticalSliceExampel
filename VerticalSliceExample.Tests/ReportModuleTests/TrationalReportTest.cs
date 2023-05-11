@@ -19,62 +19,54 @@ namespace VerticalSliceExample.Tests.ReportModuleTests;
 public class TrationalReportTest
 {
 
-    public class ReportRepositoryTests
+    [Fact]
+    public async Task GetByIdAsync_ShouldReturnReport_WhenReportExists()
     {
-        [Fact]
-        public async Task GetByIdAsync_ShouldReturnReport_WhenReportExists()
-        {
-            var reportId = Guid.NewGuid();
-            var mockDbSet = new Mock<DbSet<Db.Report>>();
-            mockDbSet.Setup(db => db.FindAsync(reportId)).ReturnsAsync(new Db.Report { Id = reportId });
+        var reportId = Guid.NewGuid();
+        var mockDbSet = new Mock<DbSet<Db.Report>>();
+        mockDbSet.Setup(db => db.FindAsync(reportId)).ReturnsAsync(new Db.Report { Id = reportId });
 
-            var mockDbContext = new Mock<AppDbContext>();
-            mockDbContext.Setup(ctx => ctx.Reports).Returns(mockDbSet.Object);
+        var mockDbContext = new Mock<AppDbContext>();
+        mockDbContext.Setup(ctx => ctx.Reports).Returns(mockDbSet.Object);
 
-            var reportRepository = new ReportRepository(mockDbContext.Object);
-            var result = await reportRepository.GetByIdAsync(reportId);
+        var reportRepository = new ReportRepository(mockDbContext.Object);
+        var result = await reportRepository.GetByIdAsync(reportId);
 
-            Assert.NotNull(result);
-            Assert.Equal(reportId, result.Id);
-        }
+        Assert.NotNull(result);
+        Assert.Equal(reportId, result.Id);
     }
 
-    public class ReportServiceTests
+    [Fact]
+    public async Task GetReportAsync_ShouldReturnReport_WhenReportExists()
     {
-        [Fact]
-        public async Task GetReportAsync_ShouldReturnReport_WhenReportExists()
-        {
-            var reportId = Guid.NewGuid();
-            var dbReport = new Db.Report { Id = reportId };
-            var reportRepositoryMock = new Mock<IReportRepository>();
-            reportRepositoryMock.Setup(r => r.GetByIdAsync(reportId)).ReturnsAsync(dbReport);
+        var reportId = Guid.NewGuid();
+        var dbReport = new Db.Report { Id = reportId };
+        var reportRepositoryMock = new Mock<IReportRepository>();
+        reportRepositoryMock.Setup(r => r.GetByIdAsync(reportId)).ReturnsAsync(dbReport);
 
-            var reportService = new ReportService(reportRepositoryMock.Object);
-            var result = await reportService.GetReportAsync(reportId);
+        var reportService = new ReportService(reportRepositoryMock.Object);
+        var result = await reportService.GetReportAsync(reportId);
 
-            Assert.NotNull(result);
-            Assert.Equal(reportId, result.Id);
-        }
+        Assert.NotNull(result);
+        Assert.Equal(reportId, result.Id);
     }
 
-    public class ReportsControllerTests
+    [Fact]
+    public async Task GetReport_ShouldReturnReport_WhenReportExists()
     {
-        [Fact]
-        public async Task GetReport_ShouldReturnReport_WhenReportExists()
-        {
-            var reportId = Guid.NewGuid();
-            var report = new Report { Id = reportId };
-            var reportServiceMock = new Mock<IReportService>();
-            reportServiceMock.Setup(s => s.GetReportAsync(reportId)).ReturnsAsync(report);
+        var reportId = Guid.NewGuid();
+        var report = new Report { Id = reportId };
+        var reportServiceMock = new Mock<IReportService>();
+        reportServiceMock.Setup(s => s.GetReportAsync(reportId)).ReturnsAsync(report);
 
-            var controller = new ReportsController(reportServiceMock.Object);
-            var result = await controller.GetReport(reportId);
+        var controller = new ReportsControllerApi(reportServiceMock.Object);
+        var result = await controller.Get(reportId);
 
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnedReport = Assert.IsType<Report>(okResult.Value);
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        var returnedReport = Assert.IsType<Report>(okResult.Value);
 
-            Assert.NotNull(returnedReport);
-            Assert.Equal(reportId, returnedReport.Id);
-        }
+        Assert.NotNull(returnedReport);
+        Assert.Equal(reportId, returnedReport.Id);
     }
+
 }
