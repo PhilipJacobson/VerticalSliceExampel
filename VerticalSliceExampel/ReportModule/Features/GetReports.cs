@@ -11,11 +11,11 @@ using System.Linq.Expressions;
 
 namespace VerticalSliceExample.ReportModule.Features;
 
-public class GetReports : IRequest<IResponse<ReportViewModel>>
+public class GetReports : IRequest<IResponse>
 {
     public List<string> Descriptions { get; set; }
     public List<Guid> Ids { get; set; }
-    public class Handler : IRequestHandler<GetReports, IResponse<ReportViewModel>>
+    public class Handler : IRequestHandler<GetReports, IResponse>
     {
         private readonly IMapper _mapper;
         private readonly IReportRepository _reportRepository;
@@ -24,7 +24,7 @@ public class GetReports : IRequest<IResponse<ReportViewModel>>
             _reportRepository = reportRepository;
             _mapper = mapper;
         }
-        public async Task<IResponse<ReportViewModel>> Handle(GetReports query, CancellationToken cancellationToken)
+        public async Task<IResponse> Handle(GetReports query, CancellationToken cancellationToken)
         {
             Expression<Func<Db.Report, bool>> filter = null;
             if (query?.Ids?.Count > 0 && query?.Descriptions?.Count > 0)
@@ -40,7 +40,6 @@ public class GetReports : IRequest<IResponse<ReportViewModel>>
                 filter = x => query.Descriptions.Contains(x.Description);
             }
             var reports = await _reportRepository.GetAllAsync(filter);
-
             if (reports?.Any() != true)
             {
                 return Response<ReportViewModel>.Ok(new ReportViewModel { ErrorMessage = "Reports not found" });
@@ -51,7 +50,6 @@ public class GetReports : IRequest<IResponse<ReportViewModel>>
                 Reports = _mapper.Map<List<Report>>(reports),
                 ErrorMessage = string.Empty
             };
-
             return Response<ReportViewModel>.Ok(viewModel);
         }
     }

@@ -2,10 +2,10 @@
 
 namespace VerticalSliceExample.CommonModule;
 
-public interface IResponse<T>
+public interface IResponse
 {
     bool IsError { get; }
     bool IsSuccess { get; }
     IActionResult ActionResult { get; }
-    T Value { get; }
+    object Value { get; }
 }

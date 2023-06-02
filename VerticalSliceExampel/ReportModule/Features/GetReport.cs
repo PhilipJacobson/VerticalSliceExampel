@@ -11,11 +11,11 @@ using VerticalSliceExample.ReportModule.Repositories.Interface;
 
 namespace VerticalSliceExample.ReportModule.Features;
 
-public class GetReport : IRequest<IResponse<Report>>
+public class GetReport : IRequest<IResponse>
 {
     public Guid Id { get; set; }
 
-    public class Handler : IRequestHandler<GetReport, IResponse<Report>>
+    public class Handler : IRequestHandler<GetReport, IResponse>
     {
         private readonly IMapper _mapper;
         private readonly IReportRepository _reportRepository;
@@ -25,12 +25,8 @@ public class GetReport : IRequest<IResponse<Report>>
             _mapper = mapper;
         }
 
-        public async Task<IResponse<Report>> Handle(
-            GetReport query,
-            CancellationToken cancellationToken
-            )
+        public async Task<IResponse> Handle(GetReport query, CancellationToken cancellationToken)
         {
-
             var report = await _reportRepository.GetByIdAsync(query.Id);
             if (report == null)
             {
@@ -45,8 +41,8 @@ public class GetReport : IRequest<IResponse<Report>>
         public GetReportValidation()
         {
             RuleFor(x => x.Id)
-            .NotEmpty().WithMessage("ReportId is required.")
-            .Must(id => Guid.TryParse(id.ToString(), out _)).WithMessage("Invalid ReportId.");
+                .NotEmpty().WithMessage("ReportId is required.")
+                .Must(id => Guid.TryParse(id.ToString(), out _)).WithMessage("Invalid ReportId.");
         }
     }
 }

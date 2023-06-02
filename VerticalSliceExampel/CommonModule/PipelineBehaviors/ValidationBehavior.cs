@@ -1,31 +1,35 @@
 ﻿using MediatR;
 using FluentValidation;
 using FluentValidation.Results;
-using VerticalSliceExample.CommonModule.Validation;
-using Azure;
 
 namespace VerticalSliceExample.CommonModule.PipelineBehaviors;
 
-public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, IResponse<TResponse>>
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
+    where TResponse : IResponse
 {
-    private readonly IValidator<TRequest> _validator;
-    public ValidationBehavior(IValidator<TRequest> validator)
+    private readonly IValidator<TRequest>? _validator;
+
+    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
     {
-        _validator = validator;
+        _validator = validators.FirstOrDefault();
     }
 
-    public async Task<IResponse<TResponse>> Handle(
+    public async Task<TResponse> Handle(
         TRequest request,
-        RequestHandlerDelegate<IResponse<TResponse>> next,
+        RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken
         )
     {
-        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
+        if (_validator != null)
         {
-            return Response<TResponse>.BadRequest(validationResult.Errors);
+            var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                return (TResponse)Response<IEnumerable<ValidationFailure>>.BadRequest(validationResult.Errors);
+            }
         }
+
         return await next();
     }
 }

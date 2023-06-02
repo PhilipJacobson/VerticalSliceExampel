@@ -9,22 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 public class GetReportTests
 {
     [Fact]
-    public async Task Handler_ShouldReturnNotFound_WhenReportDoesNotExist()
-    {
-        var reportId = Guid.NewGuid();
-        var reportRepositoryMock = new Mock<IReportRepository>();
-        reportRepositoryMock.Setup(r => r.GetByIdAsync(reportId)).ReturnsAsync((Db.Report)null);
-
-        var mapperMock = new Mock<IMapper>();
-        var handler = new GetReport.Handler(reportRepositoryMock.Object, mapperMock.Object);
-        var query = new GetReport { Id = reportId };
-
-        var response = await handler.Handle(query, CancellationToken.None);
-
-        Assert.True(response.ActionResult is NotFoundResult);
-    }
-
-    [Fact]
     public async Task Handler_ShouldReturnReport_WhenReportExists()
     {
         // Arrange
@@ -45,6 +29,22 @@ public class GetReportTests
 
         Assert.True(response.IsSuccess);
         Assert.Equal(reportViewModel, response.Value);
+    }
+
+    [Fact]
+    public async Task Handler_ShouldReturnNotFound_WhenReportDoesNotExist()
+    {
+        var reportId = Guid.NewGuid();
+        var reportRepositoryMock = new Mock<IReportRepository>();
+        reportRepositoryMock.Setup(r => r.GetByIdAsync(reportId)).ReturnsAsync((Db.Report)null);
+
+        var mapperMock = new Mock<IMapper>();
+        var handler = new GetReport.Handler(reportRepositoryMock.Object, mapperMock.Object);
+        var query = new GetReport { Id = reportId };
+
+        var response = await handler.Handle(query, CancellationToken.None);
+
+        Assert.True(response.ActionResult is NotFoundResult);
     }
 
     [Fact]

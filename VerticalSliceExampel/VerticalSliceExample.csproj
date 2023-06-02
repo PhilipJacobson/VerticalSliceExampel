@@ -29,7 +29,6 @@
     <Folder Include="PhoneModule\MappingProfile\" />
     <Folder Include="PhoneModule\Models\Models\" />
     <Folder Include="PhoneModule\Repositories\" />
-    <Folder Include="ReportModule\PipelineBehaviors\" />
   </ItemGroup>
 
   <ItemGroup>

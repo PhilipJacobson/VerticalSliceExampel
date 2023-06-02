@@ -11,6 +11,7 @@ using VerticalSliceExample.CommonModule.Repository;
 using VerticalSliceExample.CommonModule.Repository.Interface;
 using VerticalSliceExample.ReportModule.Features;
 using VerticalSliceExample.ReportModule.Models.ViewModels;
+using VerticalSliceExample.ReportModule.PipelineBehaviors;
 using VerticalSliceExample.ReportModule.Repositories;
 using VerticalSliceExample.ReportModule.Repositories.Interface;
 
@@ -43,13 +44,12 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(configuration.GetConnectionString("MediatRTestConnectionString")));
-
+    services.AddHttpContextAccessor();
     services.AddMediatR(c =>
         c.RegisterServicesFromAssemblyContaining<Program>()
-            .AddBehavior<IPipelineBehavior<GetReport, IResponse<Report>>, ValidationBehavior<GetReport, Report>>()
-            .AddBehavior<IPipelineBehavior<CreateReport, IResponse<Report>>, ValidationBehavior<CreateReport, Report>>()
+            .AddBehavior<IPipelineBehavior<DeleteReport, IResponse>, ReportAuthorizationBehavior<DeleteReport, IResponse>>()
+            .AddOpenBehavior(typeof(ValidationBehavior<,>))
             .AddOpenBehavior(typeof(LoggingBehavior<,>)));
-
     services.AddValidatorsFromAssemblyContaining<GetReport>();
 }
 
