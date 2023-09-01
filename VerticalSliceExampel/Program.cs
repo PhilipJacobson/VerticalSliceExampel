@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using VerticalSliceExample.CommonModule;
 using VerticalSliceExample.CommonModule.Data;
+using VerticalSliceExample.CommonModule.Messaging;
 using VerticalSliceExample.CommonModule.PipelineBehaviors;
 using VerticalSliceExample.CommonModule.Repository;
 using VerticalSliceExample.CommonModule.Repository.Interface;
@@ -51,6 +52,7 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
             .AddOpenBehavior(typeof(ValidationBehavior<,>))
             .AddOpenBehavior(typeof(LoggingBehavior<,>)));
     services.AddValidatorsFromAssemblyContaining<GetReport>();
+    services.AddSingleton<MessagePublisher>();
 }
 
 static void ConfigureApplication(WebApplication app)

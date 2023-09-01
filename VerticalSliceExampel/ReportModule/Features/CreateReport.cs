@@ -13,22 +13,25 @@ public class CreateReport : IRequest<IResponse>
         public string Name { get; set; }
         public string Description { get; set; }
 
-
     public class Handler : IRequestHandler<CreateReport, IResponse>
     {
         private readonly IReportRepository _reportRepository;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public Handler(IReportRepository reportRepository, IMapper mapper)
+
+        public Handler(IReportRepository reportRepository, IMapper mapper, IMediator mediator)
         {
             _reportRepository = reportRepository;
             _mapper = mapper;
+            _mediator = mediator;
         }
         public async Task<IResponse> Handle(CreateReport command, CancellationToken cancellationToken)
         {
             var report = _mapper.Map<Db.Report>(command);
             report = await _reportRepository.AddAsync(report);
             var viewReport = _mapper.Map<Report>(report);
+            _ = _mediator.Publish(new ReportCreated { Id = report.Id }, cancellationToken);
             return Response<Report>.Ok(viewReport);
         }
     }

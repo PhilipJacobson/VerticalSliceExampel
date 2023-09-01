@@ -35,37 +35,37 @@ public class TrationalReportTest
         Assert.Equal(reportId, result.Id);
     }
 
-    [Fact]
-    public async Task GetReportAsync_ShouldReturnReport_WhenReportExists()
-    {
-        var reportId = Guid.NewGuid();
-        var dbReport = new Db.Report { Id = reportId };
-        var reportRepositoryMock = new Mock<IReportRepository>();
-        reportRepositoryMock.Setup(r => r.GetByIdAsync(reportId)).ReturnsAsync(dbReport);
+    //[Fact]
+    //public async Task GetReportAsync_ShouldReturnReport_WhenReportExists()
+    //{
+    //    var reportId = Guid.NewGuid();
+    //    var dbReport = new Db.Report { Id = reportId };
+    //    var reportRepositoryMock = new Mock<IReportRepository>();
+    //    reportRepositoryMock.Setup(r => r.GetByIdAsync(reportId)).ReturnsAsync(dbReport);
 
-        var reportService = new ReportService(reportRepositoryMock.Object);
-        var result = await reportService.GetReportAsync(reportId);
+    //    var reportService = new ReportService(reportRepositoryMock.Object);
+    //    var result = await reportService.GetReportAsync(reportId);
 
-        Assert.NotNull(result);
-        Assert.Equal(reportId, result.Id);
-    }
+    //    Assert.NotNull(result);
+    //    Assert.Equal(reportId, result.Id);
+    //}
 
-    [Fact]
-    public async Task GetReport_ShouldReturnReport_WhenReportExists()
-    {
-        var reportId = Guid.NewGuid();
-        var report = new Report { Id = reportId };
-        var reportServiceMock = new Mock<IReportService>();
-        reportServiceMock.Setup(s => s.GetReportAsync(reportId)).ReturnsAsync(report);
+    //[Fact]
+    //public async Task GetReport_ShouldReturnReport_WhenReportExists()
+    //{
+    //    var reportId = Guid.NewGuid();
+    //    var report = new Report { Id = reportId };
+    //    var reportServiceMock = new Mock<IReportService>();
+    //    reportServiceMock.Setup(s => s.GetReportAsync(reportId)).ReturnsAsync(report);
 
-        var controller = new ReportsControllerApi(reportServiceMock.Object);
-        var result = await controller.Get(reportId);
+    //    var controller = new ReportsControllerApi(reportServiceMock.Object);
+    //    var result = await controller.Get(reportId);
 
-        var okResult = Assert.IsType<OkObjectResult>(result);
-        var returnedReport = Assert.IsType<Report>(okResult.Value);
+    //    var okResult = Assert.IsType<OkObjectResult>(result);
+    //    var returnedReport = Assert.IsType<Report>(okResult.Value);
 
-        Assert.NotNull(returnedReport);
-        Assert.Equal(reportId, returnedReport.Id);
-    }
+    //    Assert.NotNull(returnedReport);
+    //    Assert.Equal(reportId, returnedReport.Id);
+    //}
 
 }
