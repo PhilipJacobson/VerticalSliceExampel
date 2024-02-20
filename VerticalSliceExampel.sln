@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerticalSliceExample", "Ver
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerticalSliceExample.Tests", "VerticalSliceExample.Tests\VerticalSliceExample.Tests.csproj", "{73628891-8C93-4626-B6F1-C5450A55F552}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumerService", "ConsumerService\ConsumerService.csproj", "{82ADFD23-ADE0-487D-A68F-EEFC20A294F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerService", "ConsumerService\ConsumerService.csproj", "{82ADFD23-ADE0-487D-A68F-EEFC20A294F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{A5838203-B91C-46B8-828E-816C6D832298}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -17,12 +17,8 @@ namespace VerticalSliceExample.ReportModule.Features
             }
 
             public async Task Handle(ReportCreated notification, CancellationToken cancellationToken)
-            {
-                //fetch the email addres assosicred with the report/organisation in question. 
+            {           
                 var email = "test@email.com";
-
-                // Produce the message to RabbitMQ
-                // Your logic here
                 _ = _messagePublisher.PublishAsync(
                     new { Id = notification.Id, Email = email },
                     queueName: "ReportCreatedQueue" 

@@ -14,9 +14,6 @@ public class ReportCreated : IRequest<ReportCreatedMessage>
 
     public async Task<Unit> Handle(ReportCreatedMessage request, CancellationToken cancellationToken)
     {
-        // Your logic for handling the report creation, if any
-
-        // Send the email notification
         await _emailService.SendEmailAsync(
             request.Email,
             "Report Created",
